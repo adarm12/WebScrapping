@@ -2,15 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-public class WebWindow extends JPanel implements ActionListener{
+public class WebWindow extends JPanel implements ActionListener {
     public static final int BUTTON_WIDTH = 270, BUTTON_HEIGHT = 100, BUTTON_HEIGHT_MARGIN = 55, BUTTON_WIDTH_MARGIN = 130;
     public static final int TITLE_X = 480, TITLE_Y = 25, TITLE_WIDTH = 450, TITLE_HEIGHT = 100, TITLE_FONT_SIZE = 40;
     public Font myFont = new Font("Gisha", Font.BOLD, 30);
 
     ArrayList<JButton> allLigaButtons = createLigaButtons();
+    JLabel title;
+    JLabel backgroundLabel;
 
     public WebWindow(int x, int y, int width, int height, ImageIcon background) {
         this.setBounds(x, y, width, height);
@@ -18,13 +19,14 @@ public class WebWindow extends JPanel implements ActionListener{
 
         for (int i = 0; i < allLigaButtons.size(); i++) {
             this.add(allLigaButtons.get(i));
+            allLigaButtons.get(i).addActionListener(this);
         }
 
-        JLabel title = new MyJLabel("Football Leagues List", TITLE_X, TITLE_Y, TITLE_WIDTH
+        title = new MyJLabel("Football Leagues List", TITLE_X, TITLE_Y, TITLE_WIDTH
                 , TITLE_HEIGHT, TITLE_FONT_SIZE, Color.pink).getLabel();
         this.add(title);
 
-        JLabel backgroundLabel = new JLabel(background);
+        backgroundLabel = new JLabel(background);
         backgroundLabel.setBounds(x, y, width, height);
         this.add(backgroundLabel);
 
@@ -71,13 +73,30 @@ public class WebWindow extends JPanel implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent e) {
-        JButton selected = new JButton();
         for (int i = 0; i < allLigaButtons.size(); i++) {
-            if (e.getSource() == allLigaButtons.get(i))
-            {
-                System.out.println(allLigaButtons.get(i));
+            if (e.getSource() == allLigaButtons.get(i)) {
+                System.out.println(allLigaButtons.get(i).getText());
+                chooseLiga();
+                LigaInformation ligaInformation = new LigaInformation(0, 0, MainWindow.WINDOW_WIDTH, MainWindow.WINDOW_HEIGHT
+                        , allLigaButtons.get(i).getText());
+                this.add(ligaInformation);
+//                //TODO
+//                להסתיר הכל
+//                פתיחת
+//                חלונית חדשה
+//                כותרת של הקבוצה
+//                        קומבובוקס
             }
         }
+    }
+
+    public void chooseLiga() {
+        title.setVisible(false);
+        backgroundLabel.setVisible(false);
+        for (int i = 0; i < allLigaButtons.size(); i++) {
+            allLigaButtons.get(i).setVisible(false);
+        }
+
 
     }
 }

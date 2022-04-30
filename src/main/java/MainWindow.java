@@ -11,10 +11,11 @@ public class MainWindow extends JFrame {
     public static final int TITLE_MARGIN = 125, TITLE_Y = 200, TITLE_HEIGHT = 100, TITLE_FONT_SIZE = 38;
     public static final int ENTER_BUTTON_WIDTH = 400, ENTER_BUTTON_HEIGHT = 75;
 
+    ImageIcon background;
     JLabel backgroundLabel;
     JButton enterButton;
     JLabel title;
-    ImageIcon background;
+
 
     public MainWindow() {
         this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
