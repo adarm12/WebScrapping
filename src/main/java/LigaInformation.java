@@ -6,15 +6,18 @@ import java.util.ArrayList;
 
 public class LigaInformation extends JPanel implements ActionListener {
 
+    public static int TITLE_X = 200, TITLE_Y = 0, TITLE_WIDTH = 500, TITLE_HEIGHT = 150, TITLE_FONT_SIZE = 45;
+    public static int COMBO_BOX_X = 500, COMBO_BOX_Y = 150, COMBO_BOX_WIDTH = 250, COMBO_BOX_HEIGHT = 35;
+
     ImageIcon background;
     JLabel backgroundLabel;
     JComboBox teamIndex;
 
-    public LigaInformation(int x, int y, int width, int height, String t) {
+    public LigaInformation(int x, int y, int width, int height, String text) {
         this.setBounds(x, y, width, height);
         this.setLayout(null);
 
-        JLabel title = new MyJLabel(t, 200, 0, 500, 150, 45, Color.white).getLabel();
+        JLabel title = new MyJLabel(text, TITLE_X, TITLE_Y, TITLE_WIDTH, TITLE_HEIGHT, TITLE_FONT_SIZE, Color.white).getLabel();
         this.add(title);
 
         comboBoxDetails();
@@ -31,12 +34,13 @@ public class LigaInformation extends JPanel implements ActionListener {
 
     public void comboBoxDetails() {
         ArrayList<String> index = new ArrayList<String>();
-        index.add("1");
-        index.add("2");
-        index.add("3");
+        for (int i = 1; i <= 20 ; i++) {
+            index.add("" + i);
+        }
         teamIndex = new JComboBox(index.toArray());
         teamIndex.addActionListener(this);
-        teamIndex.setBounds(500, 150, 250, 30);
+        teamIndex.setBounds(COMBO_BOX_X, COMBO_BOX_Y, COMBO_BOX_WIDTH, COMBO_BOX_HEIGHT);
+        teamIndex.setFont(new Font ("Gisha", Font.BOLD, 20));
         this.add(teamIndex);
     }
 
@@ -46,5 +50,4 @@ public class LigaInformation extends JPanel implements ActionListener {
         backgroundLabel.setBounds(x, y, width, height);
         this.add(backgroundLabel);
     }
-
 }

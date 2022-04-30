@@ -72,6 +72,6 @@ public class MainWindow extends JFrame {
 
     public static void main(String[] args) {
         new MainWindow();
-       // WebSite.web();
+        WebSite.web();
     }
 }

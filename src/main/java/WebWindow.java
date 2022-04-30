@@ -1,13 +1,19 @@
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
+
 
 public class WebWindow extends JPanel implements ActionListener {
     public static final int BUTTON_SPANISH_X = 150, BUTTON_SPANISH_Y = 180, BUTTON_HEIGHT_MARGIN = 55, BUTTON_WIDTH_MARGIN = 130;
     public static final int TITLE_X = 480, TITLE_Y = 25, TITLE_WIDTH = 450, TITLE_HEIGHT = 100, TITLE_FONT_SIZE = 40;
-
+    public static final String SPANISH_LIGA = "Spanish Liga";
     ArrayList<JButton> allLigaButtons = createLigaButtons();
     JLabel title;
     JLabel backgroundLabel;
@@ -62,24 +68,25 @@ public class WebWindow extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
+        int x;
         for (int i = 0; i < allLigaButtons.size(); i++) {
             if (e.getSource() == allLigaButtons.get(i)) {
+
                 System.out.println(allLigaButtons.get(i).getText());
-                chooseLiga();
+                hideWindow();
+
+
+// TODO add choose LIga
+
+
                 LigaInformation ligaInformation = new LigaInformation(0, 0, MainWindow.WINDOW_WIDTH, MainWindow.WINDOW_HEIGHT
                         , allLigaButtons.get(i).getText());
                 this.add(ligaInformation);
-//                //TODO
-//                להסתיר הכל
-//                פתיחת
-//                חלונית חדשה
-//                כותרת של הקבוצה
-//                        קומבובוקס
             }
         }
     }
 
-    private void chooseLiga() {
+    private void hideWindow() {
         title.setVisible(false);
         backgroundLabel.setVisible(false);
         for (int i = 0; i < allLigaButtons.size(); i++) {
