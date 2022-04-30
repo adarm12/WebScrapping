@@ -21,13 +21,14 @@ public class WebSite {
             Document globalFootballPage = Jsoup.connect(globalFootballLink).get();
             System.out.println(globalFootballPage.title());
 
-            ArrayList <Element> allLigot = globalFootballPage.getElementsByClass("add-nav-liga");
+            ArrayList<Element> allLigot = globalFootballPage.getElementsByClass("add-nav-liga");
             Element ligaTitleBar = allLigot.get(0).child(0).child(6); // liga
             System.out.println(ligaTitleBar);
 
-            ArrayList <Element> bigTable = ligaTitleBar.getElementsByClass("tab-box  ranking-tables");
-            ArrayList<Element> scoreTable = bigTable.get(0).getElementsByClass("score-list");
-
+            ArrayList<Element> allTable = ligaTitleBar.getElementsByClass("tab-box  ranking-tables");
+//            ArrayList<Element> scoreTable = allTable.get(0).getElementsByClass("score-list");
+//            ArrayList<Element> a = scoreTable.get(0).getElementsByTag("table");
+            System.out.println(allTable.size());
 
         } catch (IOException e) {
             e.printStackTrace();
