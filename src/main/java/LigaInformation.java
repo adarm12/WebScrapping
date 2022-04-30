@@ -17,19 +17,8 @@ public class LigaInformation extends JPanel implements ActionListener {
         JLabel title = new MyJLabel(t, 200, 0, 500, 150, 45, Color.white).getLabel();
         this.add(title);
 
-        ArrayList<String> index = new ArrayList<String>();
-        index.add("1");
-        index.add("2");
-        index.add("3");
-        teamIndex = new JComboBox(index.toArray());
-        teamIndex.addActionListener(this);
-        teamIndex.setBounds(500,150,250,30);
-        this.add(teamIndex);
-
-        background = new ImageIcon("grass1.jpg");
-        backgroundLabel = new JLabel(background);
-        backgroundLabel.setBounds(x, y, width, height);
-        this.add(backgroundLabel);
+        comboBoxDetails();
+        backgroundDetails(x, y, width, height);
 
         this.setVisible(true);
     }
@@ -39,4 +28,23 @@ public class LigaInformation extends JPanel implements ActionListener {
             System.out.println(teamIndex.getSelectedItem());
         }
     }
+
+    public void comboBoxDetails() {
+        ArrayList<String> index = new ArrayList<String>();
+        index.add("1");
+        index.add("2");
+        index.add("3");
+        teamIndex = new JComboBox(index.toArray());
+        teamIndex.addActionListener(this);
+        teamIndex.setBounds(500, 150, 250, 30);
+        this.add(teamIndex);
+    }
+
+    public void backgroundDetails(int x, int y, int width, int height) {
+        background = new ImageIcon("grass1.jpg");
+        backgroundLabel = new JLabel(background);
+        backgroundLabel.setBounds(x, y, width, height);
+        this.add(backgroundLabel);
+    }
+
 }

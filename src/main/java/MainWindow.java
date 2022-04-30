@@ -45,11 +45,9 @@ public class MainWindow extends JFrame {
     }
     private void enterButtonDetails()
     {
-        enterButton = new JButton("Enter to the menu");
-        enterButton.setBounds(WINDOW_WIDTH / 2 - ENTER_BUTTON_WIDTH / 2, WINDOW_HEIGHT / 2 - ENTER_BUTTON_HEIGHT / 2,
-                ENTER_BUTTON_WIDTH, ENTER_BUTTON_HEIGHT);
-        enterButton.setFont(new Font("Gisha", Font.BOLD, 35));
-        enterButton.setFocusable(false);
+        enterButton = new MyJButton("Enter to the menu",WINDOW_WIDTH / 2 - ENTER_BUTTON_WIDTH / 2,
+                WINDOW_HEIGHT / 2 - ENTER_BUTTON_HEIGHT / 2,
+                ENTER_BUTTON_WIDTH, ENTER_BUTTON_HEIGHT,35).getButton();
         this.add(enterButton);
     }
 
