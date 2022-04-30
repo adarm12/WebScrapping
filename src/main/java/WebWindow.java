@@ -96,7 +96,5 @@ public class WebWindow extends JPanel implements ActionListener {
         for (int i = 0; i < allLigaButtons.size(); i++) {
             allLigaButtons.get(i).setVisible(false);
         }
-
-
     }
 }

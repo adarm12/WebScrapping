@@ -24,6 +24,7 @@ public class WebSite {
             Element ligaTitleBar = allLigot.get(0).child(0);
             System.out.println(ligaTitleBar);
 
+            //ArrayList<String> teamIndex = .child (i).child (0)
 
 
         } catch (IOException e) {

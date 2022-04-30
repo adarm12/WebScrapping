@@ -16,7 +16,6 @@ public class MainWindow extends JFrame {
     JButton enterButton;
     JLabel title;
 
-
     public MainWindow() {
         this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         this.setResizable(false);
@@ -38,21 +37,20 @@ public class MainWindow extends JFrame {
         ImageIcon ballIcon = new ImageIcon("ballIcon.png");
         this.setIconImage(ballIcon.getImage());
 
+        enterButtonDetails();
+        menuAllLigot();
+        backgroundDetails();
+
+        this.setVisible(true);
+    }
+    private void enterButtonDetails()
+    {
         enterButton = new JButton("Enter to the menu");
         enterButton.setBounds(WINDOW_WIDTH / 2 - ENTER_BUTTON_WIDTH / 2, WINDOW_HEIGHT / 2 - ENTER_BUTTON_HEIGHT / 2,
                 ENTER_BUTTON_WIDTH, ENTER_BUTTON_HEIGHT);
         enterButton.setFont(new Font("Gisha", Font.BOLD, 35));
         enterButton.setFocusable(false);
         this.add(enterButton);
-
-        menuAllLigot();
-
-        background = new ImageIcon("footballGate.png");
-        backgroundLabel = new JLabel(background);
-        backgroundLabel.setBounds(WINDOW_X, WINDOW_Y, WINDOW_WIDTH, WINDOW_HEIGHT);
-        this.add(backgroundLabel);
-
-        this.setVisible(true);
     }
 
     private void menuAllLigot() {
@@ -64,6 +62,14 @@ public class MainWindow extends JFrame {
             WebWindow webWindow = new WebWindow(WINDOW_X, WINDOW_Y, WINDOW_WIDTH, WINDOW_HEIGHT, background);
             this.add(webWindow);
         }));
+    }
+
+    private void backgroundDetails()
+    {
+        background = new ImageIcon("footballGate.png");
+        backgroundLabel = new JLabel(background);
+        backgroundLabel.setBounds(WINDOW_X, WINDOW_Y, WINDOW_WIDTH, WINDOW_HEIGHT);
+        this.add(backgroundLabel);
     }
 
     public static void main(String[] args) {
