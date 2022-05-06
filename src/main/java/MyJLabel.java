@@ -3,6 +3,7 @@ import java.awt.*;
 
 public class MyJLabel extends JLabel {
     Font myFont = new Font("Gisha", Font.BOLD, 30);
+
     private JLabel label;
 
     public MyJLabel(String text, int x, int y, int width, int height) {

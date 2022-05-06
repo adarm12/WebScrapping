@@ -11,10 +11,10 @@ public class MainWindow extends JFrame {
     public static final int TITLE_MARGIN = 125, TITLE_Y = 200, TITLE_HEIGHT = 100, TITLE_FONT_SIZE = 38;
     public static final int ENTER_BUTTON_WIDTH = 400, ENTER_BUTTON_HEIGHT = 75;
 
-    ImageIcon background;
-    JLabel backgroundLabel;
-    JButton enterButton;
-    JLabel title;
+    private ImageIcon background;
+    private JLabel backgroundLabel;
+    private JButton enterButton;
+    private JLabel title;
 
     public MainWindow() {
         this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -43,11 +43,11 @@ public class MainWindow extends JFrame {
 
         this.setVisible(true);
     }
-    private void enterButtonDetails()
-    {
-        enterButton = new MyJButton("Enter to the menu",WINDOW_WIDTH / 2 - ENTER_BUTTON_WIDTH / 2,
+
+    private void enterButtonDetails() {
+        enterButton = new MyJButton("Enter to the menu", WINDOW_WIDTH / 2 - ENTER_BUTTON_WIDTH / 2,
                 WINDOW_HEIGHT / 2 - ENTER_BUTTON_HEIGHT / 2,
-                ENTER_BUTTON_WIDTH, ENTER_BUTTON_HEIGHT,35).getButton();
+                ENTER_BUTTON_WIDTH, ENTER_BUTTON_HEIGHT, 35).getButton();
         this.add(enterButton);
     }
 
@@ -62,8 +62,7 @@ public class MainWindow extends JFrame {
         }));
     }
 
-    private void backgroundDetails()
-    {
+    private void backgroundDetails() {
         background = new ImageIcon("footballGate.png");
         backgroundLabel = new JLabel(background);
         backgroundLabel.setBounds(WINDOW_X, WINDOW_Y, WINDOW_WIDTH, WINDOW_HEIGHT);

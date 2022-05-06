@@ -4,6 +4,7 @@ import java.awt.*;
 public class MyJButton extends JButton {
     Font myFont = new Font("Gisha", Font.BOLD, 30);
     public static final int BUTTON_WIDTH = 270, BUTTON_HEIGHT = 100;
+
     private JButton button;
 
     public MyJButton(String text, int x, int y) {

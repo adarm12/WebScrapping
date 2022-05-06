@@ -22,15 +22,15 @@ public class WebSite {
             System.out.println(globalFootballPage.title());
 
             ArrayList<Element> allLigot = globalFootballPage.getElementsByClass("add-nav-liga");
-            Element ligaTitleBar = allLigot.get(0).child(0).child(6); // liga
-            System.out.println(ligaTitleBar);
+            Element liga = allLigot.get(0).child(0).child(6); // liga
+            System.out.println(liga);
 
-            
+            String linkLiga = liga.child(0).attr("href");
+            Document ligaPage =Jsoup.connect(linkLiga).get();
 
-            ArrayList<Element> allTable = ligaTitleBar.getElementsByClass("score-list");
-//            ArrayList<Element> scoreTable = allTable.get(0).getElementsByClass("score-list");
-//            ArrayList<Element> a = scoreTable.get(0).getElementsByTag("table");
-            System.out.println(allTable.size());
+            ArrayList<Element> allTable = ligaPage.getElementsByClass("score-list");
+            ArrayList<Element> a = allTable.get(0).getElementsByTag("table");
+            System.out.println(a.size());
 
         } catch (IOException e) {
             e.printStackTrace();
