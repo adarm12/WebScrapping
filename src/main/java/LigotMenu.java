@@ -1,16 +1,20 @@
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
 public class LigotMenu extends JPanel implements ActionListener {
     public static final int BUTTON_SPANISH_X = 150, BUTTON_SPANISH_Y = 180, BUTTON_HEIGHT_MARGIN = 55, BUTTON_WIDTH_MARGIN = 130;
     public static final int TITLE_X = 480, TITLE_Y = 25, TITLE_WIDTH = 450, TITLE_HEIGHT = 100, TITLE_FONT_SIZE = 40;
-    public static final String SPANISH_LIGA = "Spanish Liga";
 
     private ArrayList<JButton> allLigaButtons = createLigaButtons();
     private JLabel title;
@@ -25,7 +29,7 @@ public class LigotMenu extends JPanel implements ActionListener {
             allLigaButtons.get(i).addActionListener(this);
         }
 
-        title = new MyJLabel("Football Leagues List", TITLE_X, TITLE_Y, TITLE_WIDTH
+        title = new MyJLabel("רשימת הליגות:", TITLE_X, TITLE_Y, TITLE_WIDTH
                 , TITLE_HEIGHT, TITLE_FONT_SIZE, Color.pink).getLabel();
         this.add(title);
 
@@ -37,49 +41,70 @@ public class LigotMenu extends JPanel implements ActionListener {
     private ArrayList<JButton> createLigaButtons() {
         ArrayList<JButton> allLigaButtons = new ArrayList<>();
 
-        JButton spanishLiga = new MyJButton("Spanish Liga", BUTTON_SPANISH_X, BUTTON_SPANISH_Y).getButton(); // ליגה ספרדית
+        JButton spanishLiga = new MyJButton("ליגה ספרדית", BUTTON_SPANISH_X, BUTTON_SPANISH_Y).getButton();
         allLigaButtons.add(spanishLiga);
 
-        JButton frenchLiga = new MyJButton("French Liga",
+        JButton frenchLiga = new MyJButton("ליגה צרפתית",
                 spanishLiga.getX() + spanishLiga.getWidth() + BUTTON_WIDTH_MARGIN
-                , spanishLiga.getY()).getButton(); // ליגה צרפתית
+                , spanishLiga.getY()).getButton();
         allLigaButtons.add(frenchLiga);
 
-        JButton germanLiga = new MyJButton("German Liga",
+        JButton germanLiga = new MyJButton("ליגה גרמנית",
                 frenchLiga.getX() + frenchLiga.getWidth() + BUTTON_WIDTH_MARGIN,
-                frenchLiga.getY()).getButton(); //ליגה גרמנית
+                frenchLiga.getY()).getButton();
         allLigaButtons.add(germanLiga);
 
-        JButton italianLiga = new MyJButton("Italian Liga", spanishLiga.getX(),
-                spanishLiga.getY() + spanishLiga.getHeight() + BUTTON_HEIGHT_MARGIN).getButton(); // ליגה איטלקית
+        JButton italianLiga = new MyJButton("ליגה איטלקית", spanishLiga.getX(),
+                spanishLiga.getY() + spanishLiga.getHeight() + BUTTON_HEIGHT_MARGIN).getButton();
         allLigaButtons.add(italianLiga);
 
-        JButton dutchLiga = new MyJButton("Dutch Liga", italianLiga.getX() + italianLiga.getWidth() + BUTTON_WIDTH_MARGIN
-                , italianLiga.getY()).getButton(); // ליגה הולנדית
+        JButton dutchLiga = new MyJButton("ליגה הולנדית", italianLiga.getX() + italianLiga.getWidth() + BUTTON_WIDTH_MARGIN
+                , italianLiga.getY()).getButton();
         allLigaButtons.add(dutchLiga);
 
-        JButton belgianLiga = new MyJButton("Belgian Liga", dutchLiga.getX() + dutchLiga.getWidth() + BUTTON_WIDTH_MARGIN
-                , dutchLiga.getY()).getButton(); // ליגה בלגית
+        JButton belgianLiga = new MyJButton("ליגה בלגית", dutchLiga.getX() + dutchLiga.getWidth() + BUTTON_WIDTH_MARGIN
+                , dutchLiga.getY()).getButton();
         allLigaButtons.add(belgianLiga);
 
         return allLigaButtons;
     }
 
     public void actionPerformed(ActionEvent e) {
-        for (int i = 0; i < allLigaButtons.size(); i++) {
-            if (e.getSource() == allLigaButtons.get(i)) {
+        try {
+            Document web = Jsoup.connect(MainWebWindow.WEB).get();
+            Element titleBar = web.getElementById("header").getElementById("nav");
+            Element globalFootball = titleBar.child(1).child(1);
+            String globalFootballLink = globalFootball.getElementsByTag("a").attr("href");
+            Document globalFootballPage = Jsoup.connect(globalFootballLink).get();
+            ArrayList<Element> allLigot = globalFootballPage.getElementsByClass("add-nav-liga");
 
-                System.out.println(allLigaButtons.get(i).getText());
-                hideWindow();
+            for (int i = 0; i < allLigaButtons.size(); i++) {
+                if (e.getSource() == allLigaButtons.get(i)) {
+                    for (int j = 0; j < allLigot.get(0).child(0).childrenSize(); j++) {
+                        if (allLigaButtons.get(i).getText().equals(allLigot.get(0).child(0).child(j).text()))
+                        // System.out.println(allLigot.get(0).child(0).child(j).text());
+                        {
+                            Element liga = allLigot.get(0).child(0).child(j);
+                            String linkLiga = liga.child(0).attr("href");
+                            Document ligaPage = Jsoup.connect(linkLiga).get();
+                            hideWindow();
+                            LigaInformation ligaInformation = new LigaInformation(0, 0, MainWebWindow.WINDOW_WIDTH, MainWebWindow.WINDOW_HEIGHT
+                                    , allLigaButtons.get(i).getText(), ligaPage);
+                            this.add(ligaInformation);
+                        }
+                    }
 
-// TODO add choose LIga
-
-                LigaInformation ligaInformation = new LigaInformation(0, 0, MainWebWindow.WINDOW_WIDTH, MainWebWindow.WINDOW_HEIGHT
-                        , allLigaButtons.get(i).getText());
-                this.add(ligaInformation);
+                    // 1- צרפתית, 4- ספרדית, 5- אנגלית,6 - איטלקית, 7 - גרמנית, 8- הולנדית, 19-בלגית
+                    // Element liga = allLigot.get(0).child(0).child(8); //*****************************************
+                    // System.out.println(allLigaButtons.get(i).getText());
+                }
             }
+        } catch (IOException ea) {
+            ea.printStackTrace();
         }
+
     }
+
 
     private void hideWindow() {
         title.setVisible(false);

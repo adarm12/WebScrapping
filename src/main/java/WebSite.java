@@ -22,9 +22,11 @@ public class WebSite {
 //            System.out.println(globalFootballPage.title());
 
             ArrayList<Element> allLigot = globalFootballPage.getElementsByClass("add-nav-liga");
-            Element liga = allLigot.get(0).child(0).child(8); // liga
+           // Element liga = allLigot.get(0).child(0).child(8); // liga
+            Element liga = allLigot.get(0).child(0);
             System.out.println(liga);
 // 1- צרפתית, 4- ספרדית, 5- אנגלית,6 - איטלקית, 7 - גרמנית, 8- הולנדית, 19-בלגית
+
 
             String linkLiga = liga.child(0).attr("href");
             Document ligaPage = Jsoup.connect(linkLiga).get();

@@ -9,7 +9,7 @@ public class MainWebWindow extends JFrame {
     public static final String WEB = "https://www.sport5.co.il/";
     public static final int WINDOW_X = 0, WINDOW_Y = 0, WINDOW_HEIGHT = 955, WINDOW_WIDTH = 1400;
     public static final int TITLE_MARGIN = 125, TITLE_Y = 200, TITLE_HEIGHT = 100, TITLE_FONT_SIZE = 38;
-    public static final int ENTER_BUTTON_WIDTH = 400, ENTER_BUTTON_HEIGHT = 75;
+    public static final int ENTER_BUTTON_WIDTH = 400, ENTER_BUTTON_HEIGHT = 75, FONT_SIZE_ENTER_BUTTON = 35;
 
     private ImageIcon background;
     private JLabel backgroundLabel;
@@ -45,9 +45,9 @@ public class MainWebWindow extends JFrame {
     }
 
     private void enterButtonDetails() {
-        enterButton = new MyJButton("Enter to the menu", WINDOW_WIDTH / 2 - ENTER_BUTTON_WIDTH / 2,
+        enterButton = new MyJButton("כניסה לתפריט", WINDOW_WIDTH / 2 - ENTER_BUTTON_WIDTH / 2,
                 WINDOW_HEIGHT / 2 - ENTER_BUTTON_HEIGHT / 2,
-                ENTER_BUTTON_WIDTH, ENTER_BUTTON_HEIGHT, 35).getButton();
+                ENTER_BUTTON_WIDTH, ENTER_BUTTON_HEIGHT, FONT_SIZE_ENTER_BUTTON).getButton();
         this.add(enterButton);
     }
 
@@ -70,7 +70,6 @@ public class MainWebWindow extends JFrame {
     }
 
     public static void main(String[] args) {
-       // new LigaMenu();
-        WebSite.web();
+        new MainWebWindow();
     }
 }
