@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
-public class WebWindow extends JPanel implements ActionListener {
+public class LigotMenu extends JPanel implements ActionListener {
     public static final int BUTTON_SPANISH_X = 150, BUTTON_SPANISH_Y = 180, BUTTON_HEIGHT_MARGIN = 55, BUTTON_WIDTH_MARGIN = 130;
     public static final int TITLE_X = 480, TITLE_Y = 25, TITLE_WIDTH = 450, TITLE_HEIGHT = 100, TITLE_FONT_SIZE = 40;
     public static final String SPANISH_LIGA = "Spanish Liga";
@@ -16,7 +16,7 @@ public class WebWindow extends JPanel implements ActionListener {
     private JLabel title;
     private JLabel backgroundLabel;
 
-    public WebWindow(int x, int y, int width, int height, ImageIcon background) {
+    public LigotMenu(int x, int y, int width, int height, ImageIcon background) {
         this.setBounds(x, y, width, height);
         this.setLayout(null);
 
@@ -66,18 +66,15 @@ public class WebWindow extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        int x;
         for (int i = 0; i < allLigaButtons.size(); i++) {
             if (e.getSource() == allLigaButtons.get(i)) {
 
                 System.out.println(allLigaButtons.get(i).getText());
                 hideWindow();
 
-
 // TODO add choose LIga
 
-
-                LigaInformation ligaInformation = new LigaInformation(0, 0, MainWindow.WINDOW_WIDTH, MainWindow.WINDOW_HEIGHT
+                LigaInformation ligaInformation = new LigaInformation(0, 0, MainWebWindow.WINDOW_WIDTH, MainWebWindow.WINDOW_HEIGHT
                         , allLigaButtons.get(i).getText());
                 this.add(ligaInformation);
             }

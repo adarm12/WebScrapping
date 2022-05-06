@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,7 +12,7 @@ public class LigaInformation extends JPanel implements ActionListener {
 
     private ImageIcon background;
     private JLabel backgroundLabel;
-    private JComboBox teamIndex;
+    private JComboBox groupIndexCombo;
 
     public LigaInformation(int x, int y, int width, int height, String text) {
         this.setBounds(x, y, width, height);
@@ -20,28 +21,29 @@ public class LigaInformation extends JPanel implements ActionListener {
         JLabel title = new MyJLabel(text, TITLE_X, TITLE_Y, TITLE_WIDTH, TITLE_HEIGHT, TITLE_FONT_SIZE, Color.white).getLabel();
         this.add(title);
 
-        comboBoxDetails();
+        comboBoxDetails(20); ////***************************************************
+
         backgroundDetails(x, y, width, height);
 
         this.setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == teamIndex) {
-            System.out.println(teamIndex.getSelectedItem());
+        if (e.getSource() == groupIndexCombo) {
+            System.out.println(groupIndexCombo.getSelectedItem());
         }
     }
 
-    public void comboBoxDetails() {
+    public void comboBoxDetails(int size) {
         ArrayList<String> index = new ArrayList<String>();
-        for (int i = 1; i <= 20; i++) {
+        for (int i = 1; i < size; i++) {
             index.add("" + i);
         }
-        teamIndex = new JComboBox(index.toArray());
-        teamIndex.addActionListener(this);
-        teamIndex.setBounds(COMBO_BOX_X, COMBO_BOX_Y, COMBO_BOX_WIDTH, COMBO_BOX_HEIGHT);
-        teamIndex.setFont(new Font("Gisha", Font.BOLD, 20));
-        this.add(teamIndex);
+        groupIndexCombo = new JComboBox(index.toArray());
+        groupIndexCombo.addActionListener(this);
+        groupIndexCombo.setBounds(COMBO_BOX_X, COMBO_BOX_Y, COMBO_BOX_WIDTH, COMBO_BOX_HEIGHT);
+        groupIndexCombo.setFont(new Font("Gisha", Font.BOLD, 20));
+        this.add(groupIndexCombo);
     }
 
     public void backgroundDetails(int x, int y, int width, int height) {
@@ -50,4 +52,5 @@ public class LigaInformation extends JPanel implements ActionListener {
         backgroundLabel.setBounds(x, y, width, height);
         this.add(backgroundLabel);
     }
+
 }

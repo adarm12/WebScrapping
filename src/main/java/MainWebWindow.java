@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
-public class MainWindow extends JFrame {
+public class MainWebWindow extends JFrame {
     public static final String WEB = "https://www.sport5.co.il/";
     public static final int WINDOW_X = 0, WINDOW_Y = 0, WINDOW_HEIGHT = 955, WINDOW_WIDTH = 1400;
     public static final int TITLE_MARGIN = 125, TITLE_Y = 200, TITLE_HEIGHT = 100, TITLE_FONT_SIZE = 38;
@@ -16,7 +16,7 @@ public class MainWindow extends JFrame {
     private JButton enterButton;
     private JLabel title;
 
-    public MainWindow() {
+    public MainWebWindow() {
         this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -57,8 +57,8 @@ public class MainWindow extends JFrame {
             enterButton.setVisible(false);
             title.setVisible(false);
             backgroundLabel.setVisible(false);
-            WebWindow webWindow = new WebWindow(WINDOW_X, WINDOW_Y, WINDOW_WIDTH, WINDOW_HEIGHT, background);
-            this.add(webWindow);
+            LigotMenu ligotMenu = new LigotMenu(WINDOW_X, WINDOW_Y, WINDOW_WIDTH, WINDOW_HEIGHT, background);
+            this.add(ligotMenu);
         }));
     }
 
@@ -70,7 +70,7 @@ public class MainWindow extends JFrame {
     }
 
     public static void main(String[] args) {
-        new MainWindow();
+       // new LigaMenu();
         WebSite.web();
     }
 }
