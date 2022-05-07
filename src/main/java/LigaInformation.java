@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class LigaInformation extends JPanel implements ActionListener {
 
     public static int TITLE_X = 800, TITLE_Y = 0, TITLE_WIDTH = 500, TITLE_HEIGHT = 150, TITLE_FONT_SIZE = 50;
-    public static int COMBO_BOX_X = 500, COMBO_BOX_Y = 170, COMBO_BOX_WIDTH = 200, COMBO_BOX_HEIGHT = 35, FONT_SIZE_COMBO = 20;
+    public static int COMBO_BOX_X = 520, COMBO_BOX_Y = 170, COMBO_BOX_WIDTH = 180, COMBO_BOX_HEIGHT = 35, FONT_SIZE_COMBO = 20;
     public static int DESCRIPTION_COMBO_X = 750, DESCRIPTION_COMBO_Y = 150, DESCRIPTION_COMBO_WIDTH = 600,
             DESCRIPTION_COMBO_HEIGHT = 70, FONT_SIZE_DESCRIPTION_COMBO_ = 30;
 
@@ -40,6 +40,7 @@ public class LigaInformation extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == groupIndexCombo) {
+//            groupIndexCombo.setEnabled(false);
             System.out.println(groupIndexCombo.getSelectedItem() + " index:" + groupIndexCombo.getSelectedIndex());
             showSelectedGroup(this.ligaPage, groupIndexCombo.getSelectedIndex());
         }
@@ -69,7 +70,7 @@ public class LigaInformation extends JPanel implements ActionListener {
     }
 
     private void scoreBored(String groupInformation) {
-        JLabel showGroupInformation = new MyJLabel(groupInformation, 0,  0,
+        JLabel showGroupInformation = new MyJLabel(groupInformation, 0, 0,
                 500, 500, FONT_SIZE_DESCRIPTION_COMBO_, Color.white).getLabel();
         this.add(showGroupInformation);
     }
