@@ -30,6 +30,9 @@ public class LigaInformation extends JPanel implements ActionListener {
                 DESCRIPTION_COMBO_WIDTH, DESCRIPTION_COMBO_HEIGHT, FONT_SIZE_DESCRIPTION_COMBO_, Color.white).getLabel();
         this.add(descriptionCombo);
 
+        scoreBored("שם קבוצה:     ניקוד:");
+
+
         this.ligaPage = ligaPage;
         comboBoxDetails(amountOfGroups(scoreTable(ligaPage)));
 
@@ -42,8 +45,7 @@ public class LigaInformation extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == groupIndexCombo) {
             System.out.println(groupIndexCombo.getSelectedItem() + " index:" + groupIndexCombo.getSelectedIndex());
-            showSelectedGroup(this.ligaPage, groupIndexCombo.getSelectedIndex());
-            timer();
+            selectedGroup(this.ligaPage, groupIndexCombo.getSelectedIndex());
         }
     }
 
@@ -58,7 +60,7 @@ public class LigaInformation extends JPanel implements ActionListener {
         return num;
     }
 
-    private void showSelectedGroup(Document ligaPage, int index) {
+    private void selectedGroup(Document ligaPage, int index) {
         if (index != 0) {
             ArrayList<Element> table = scoreTable(ligaPage);
             Element group = table.get(0).child(index);
@@ -71,8 +73,14 @@ public class LigaInformation extends JPanel implements ActionListener {
     }
 
     private void scoreBored(String groupInformation) {
-        JLabel showGroupInformation = new MyJLabel(groupInformation, 0, 0,
+//        JLabel title = new JLabel("שם הקבוצה:          ניקוד:");
+//        title.setBackground(Color.red);
+//        title.setBounds(500, 500, 500, 300);
+//        this.add(title);
+
+        JLabel showGroupInformation = new MyJLabel(groupInformation, 500, 300,
                 500, 500, FONT_SIZE_DESCRIPTION_COMBO_, Color.white).getLabel();
+        showGroupInformation.setBackground(Color.red);
         this.add(showGroupInformation);
     }
 
@@ -103,12 +111,13 @@ public class LigaInformation extends JPanel implements ActionListener {
                     System.out.println("Swing timer started");
                 }
             };
-            Timer timer = new Timer(555, time);
+            Timer timer = new Timer(10, time);
             timer.setRepeats(false);
             timer.start();
             Thread.sleep(10000);
             System.out.println("Timeout");
             this.setVisible(false);
+
         } catch (InterruptedException expn) {
         }
     }

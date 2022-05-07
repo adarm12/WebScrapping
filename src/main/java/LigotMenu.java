@@ -93,8 +93,6 @@ public class LigotMenu extends JPanel implements ActionListener {
                             this.add(ligaInformation);
                         }
                     }
-                    // 1- צרפתית, 4- ספרדית, 5- אנגלית,6 - איטלקית, 7 - גרמנית, 8- הולנדית, 19-בלגית
-                    // Element liga = allLigot.get(0).child(0).child(8); //*****************************************
                 }
             }
         } catch (IOException ea) {
