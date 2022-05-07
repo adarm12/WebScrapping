@@ -1,6 +1,7 @@
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +25,12 @@ public class WebSite {
             ArrayList<Element> allLigot = globalFootballPage.getElementsByClass("add-nav-liga");
            // Element liga = allLigot.get(0).child(0).child(8); // liga
             Element liga = allLigot.get(0).child(0);
-            System.out.println(liga);
+//            System.out.println(liga);
+            for (int i = 0; i < allLigot.get(0).child(0).childrenSize(); i++) {
+//                System.out.println(allLigot.get(0).child(0).childrenSize());
+                    System.out.println(allLigot.get(0).child(0).child(i).text());
+
+            }
 // 1- צרפתית, 4- ספרדית, 5- אנגלית,6 - איטלקית, 7 - גרמנית, 8- הולנדית, 19-בלגית
 
 
@@ -35,6 +41,7 @@ public class WebSite {
             ArrayList<Element> allTable = ligaPage.getElementsByClass("score-list");
             ArrayList<Element> scoreTable = allTable.get(0).getElementsByTag("table");
 //                       System.out.println(scoreTable.size());
+
 
             ArrayList<Element> bodyScore = scoreTable.get(0).getElementsByTag("tbody");
             int LigaSize = bodyScore.get(0).childrenSize();
