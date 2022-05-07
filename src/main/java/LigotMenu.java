@@ -80,31 +80,27 @@ public class LigotMenu extends JPanel implements ActionListener {
 
             for (int i = 0; i < allLigaButtons.size(); i++) {
                 if (e.getSource() == allLigaButtons.get(i)) {
-                    for (int j = 0; j < allLigot.get(0).child(0).childrenSize(); j++) {
-                        if (allLigaButtons.get(i).getText().equals(allLigot.get(0).child(0).child(j).text()))
-                        // System.out.println(allLigot.get(0).child(0).child(j).text());
-                        {
-                            Element liga = allLigot.get(0).child(0).child(j);
+                    Element currentElement = allLigot.get(0).child(0);
+                    for (int j = 0; j < currentElement.childrenSize(); j++) {
+                        if (allLigaButtons.get(i).getText().equals(currentElement.child(j).text())) {
+                            Element liga = currentElement.child(j);
                             String linkLiga = liga.child(0).attr("href");
                             Document ligaPage = Jsoup.connect(linkLiga).get();
                             hideWindow();
-                            LigaInformation ligaInformation = new LigaInformation(0, 0, MainWebWindow.WINDOW_WIDTH, MainWebWindow.WINDOW_HEIGHT
-                                    , allLigaButtons.get(i).getText(), ligaPage);
+
+                            LigaInformation ligaInformation = new LigaInformation(0, 0, MainWebWindow.WINDOW_WIDTH,
+                                    MainWebWindow.WINDOW_HEIGHT, allLigaButtons.get(i).getText(), ligaPage);
                             this.add(ligaInformation);
                         }
                     }
-
                     // 1- צרפתית, 4- ספרדית, 5- אנגלית,6 - איטלקית, 7 - גרמנית, 8- הולנדית, 19-בלגית
                     // Element liga = allLigot.get(0).child(0).child(8); //*****************************************
-                    // System.out.println(allLigaButtons.get(i).getText());
                 }
             }
         } catch (IOException ea) {
             ea.printStackTrace();
         }
-
     }
-
 
     private void hideWindow() {
         title.setVisible(false);

@@ -10,13 +10,15 @@ import java.util.ArrayList;
 
 public class LigaInformation extends JPanel implements ActionListener {
 
-    public static int TITLE_X = 800, TITLE_Y = 0, TITLE_WIDTH = 500, TITLE_HEIGHT = 150, TITLE_FONT_SIZE = 45;
-    public static int COMBO_BOX_X = 400, COMBO_BOX_Y = 170, COMBO_BOX_WIDTH = 250, COMBO_BOX_HEIGHT = 35, FONT_SIZE_COMBO = 20;
-    public static int DESCRIPTION_COMBO_X = 750,DESCRIPTION_COMBO_Y = 150, DESCRIPTION_COMBO_WIDTH = 600, DESCRIPTION_COMBO_HEIGHT = 70, FONT_SIZE_DESCRIPTION_COMBO_ = 25;
+    public static int TITLE_X = 800, TITLE_Y = 0, TITLE_WIDTH = 500, TITLE_HEIGHT = 150, TITLE_FONT_SIZE = 50;
+    public static int COMBO_BOX_X = 500, COMBO_BOX_Y = 170, COMBO_BOX_WIDTH = 200, COMBO_BOX_HEIGHT = 35, FONT_SIZE_COMBO = 20;
+    public static int DESCRIPTION_COMBO_X = 750, DESCRIPTION_COMBO_Y = 150, DESCRIPTION_COMBO_WIDTH = 600,
+            DESCRIPTION_COMBO_HEIGHT = 70, FONT_SIZE_DESCRIPTION_COMBO_ = 30;
 
     private ImageIcon background;
     private JLabel backgroundLabel;
     private JComboBox groupIndexCombo;
+    private Document ligaPage;
 
     public LigaInformation(int x, int y, int width, int height, String text, Document ligaPage) {
         this.setBounds(x, y, width, height);
@@ -28,7 +30,8 @@ public class LigaInformation extends JPanel implements ActionListener {
                 DESCRIPTION_COMBO_WIDTH, DESCRIPTION_COMBO_HEIGHT, FONT_SIZE_DESCRIPTION_COMBO_, Color.white).getLabel();
         this.add(descriptionCombo);
 
-        comboBoxDetails(numberOfGroups(ligaPage));
+        this.ligaPage = ligaPage;
+        comboBoxDetails(amountOfGroups(scoreTable(ligaPage)));
 
         backgroundDetails(x, y, width, height);
 
@@ -37,12 +40,43 @@ public class LigaInformation extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == groupIndexCombo) {
-            System.out.println(groupIndexCombo.getSelectedItem());
+            System.out.println(groupIndexCombo.getSelectedItem() + " index:" + groupIndexCombo.getSelectedIndex());
+            showSelectedGroup(this.ligaPage, groupIndexCombo.getSelectedIndex());
         }
+    }
+
+    private ArrayList<Element> scoreTable(Document ligaPage) {
+        ArrayList<Element> allTable = ligaPage.getElementsByClass("score-list");
+        ArrayList<Element> table = allTable.get(0).getElementsByTag("table").get(0).getElementsByTag("tbody");
+        return table;
+    }
+
+    private int amountOfGroups(ArrayList<Element> table) {
+        int num = table.get(0).childrenSize();
+        return num;
+    }
+
+    private void showSelectedGroup(Document ligaPage, int index) {
+        if (index != 0) {
+            ArrayList<Element> table = scoreTable(ligaPage);
+            Element group = table.get(0).child(index);
+            String groupName = group.getElementsByClass("big").text();
+            String groupScore = group.child(8).text();
+            String groupInformation = (groupName + "     " + groupScore);
+            System.out.println(groupInformation);
+            scoreBored(groupInformation);
+        }
+    }
+
+    private void scoreBored(String groupInformation) {
+        JLabel showGroupInformation = new MyJLabel(groupInformation, 0,  0,
+                500, 500, FONT_SIZE_DESCRIPTION_COMBO_, Color.white).getLabel();
+        this.add(showGroupInformation);
     }
 
     private void comboBoxDetails(int size) {
         ArrayList<String> index = new ArrayList<String>();
+        index.add("");
         for (int i = 1; i < size; i++) {
             index.add("" + i);
         }
@@ -59,15 +93,4 @@ public class LigaInformation extends JPanel implements ActionListener {
         backgroundLabel.setBounds(x, y, width, height);
         this.add(backgroundLabel);
     }
-
-    private int numberOfGroups(Document ligaPage) {
-        int num;
-        ArrayList<Element> allTable = ligaPage.getElementsByClass("score-list");
-        ArrayList<Element> scoreTable = allTable.get(0).getElementsByTag("table");
-        ArrayList<Element> bodyScore = scoreTable.get(0).getElementsByTag("tbody");
-        num = bodyScore.get(0).childrenSize();
-        return num;
-    }
-
-
 }
