@@ -14,9 +14,10 @@ public class LigaInformation extends JPanel implements ActionListener {
     public static int COMBO_BOX_X = 500, COMBO_BOX_Y = 170, COMBO_BOX_WIDTH = 200, COMBO_BOX_HEIGHT = 35, FONT_SIZE_COMBO = 20;
     public static int DESCRIPTION_COMBO_X = 750, DESCRIPTION_COMBO_Y = 150, DESCRIPTION_COMBO_WIDTH = 600,
             DESCRIPTION_COMBO_HEIGHT = 70, FONT_SIZE_DESCRIPTION_COMBO_ = 30;
+    public static int GROUP_INFO_X = 600, GROUP_INFO_Y = 150, GROUP_INFO_WIDTH = 1400, GROUP_INFO_HEIGHT = 500,
+            GROUP_INFO_FONT = 40;
 
     private ImageIcon background;
-    private JLabel backgroundLabel;
     private JComboBox groupIndexCombo;
     private Document ligaPage;
 
@@ -30,14 +31,9 @@ public class LigaInformation extends JPanel implements ActionListener {
                 DESCRIPTION_COMBO_WIDTH, DESCRIPTION_COMBO_HEIGHT, FONT_SIZE_DESCRIPTION_COMBO_, Color.white).getLabel();
         this.add(descriptionCombo);
 
-        scoreBored("שם קבוצה:     ניקוד:");
-
-
         this.ligaPage = ligaPage;
         comboBoxDetails(amountOfGroups(scoreTable(ligaPage)));
-
-        backgroundDetails(x, y, width, height);
-
+        this.background = new ImageIcon("A.jpg");
         this.setVisible(true);
     }
 
@@ -45,7 +41,8 @@ public class LigaInformation extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == groupIndexCombo) {
             System.out.println(groupIndexCombo.getSelectedItem() + " index:" + groupIndexCombo.getSelectedIndex());
-            selectedGroup(this.ligaPage, groupIndexCombo.getSelectedIndex());
+            showSelectedGroup(this.ligaPage, groupIndexCombo.getSelectedIndex());
+//            timer();
         }
     }
 
@@ -60,28 +57,23 @@ public class LigaInformation extends JPanel implements ActionListener {
         return num;
     }
 
-    private void selectedGroup(Document ligaPage, int index) {
+    private void showSelectedGroup(Document ligaPage, int index) {
         if (index != 0) {
             ArrayList<Element> table = scoreTable(ligaPage);
             Element group = table.get(0).child(index);
             String groupName = group.getElementsByClass("big").text();
             String groupScore = group.child(8).text();
-            String groupInformation = (groupName + "     " + groupScore);
+            String groupInformation = ("שם הקבוצה: " + groupName + "     " + " ניקוד: " + groupScore);
             System.out.println(groupInformation);
             scoreBored(groupInformation);
         }
     }
 
     private void scoreBored(String groupInformation) {
-//        JLabel title = new JLabel("שם הקבוצה:          ניקוד:");
-//        title.setBackground(Color.red);
-//        title.setBounds(500, 500, 500, 300);
-//        this.add(title);
-
-        JLabel showGroupInformation = new MyJLabel(groupInformation, 500, 300,
-                500, 500, FONT_SIZE_DESCRIPTION_COMBO_, Color.white).getLabel();
-        showGroupInformation.setBackground(Color.red);
+        JLabel showGroupInformation = new MyJLabel(groupInformation, GROUP_INFO_X, GROUP_INFO_Y,
+                GROUP_INFO_WIDTH, GROUP_INFO_HEIGHT, GROUP_INFO_FONT, Color.white).getLabel();
         this.add(showGroupInformation);
+        repaint();
     }
 
     private void comboBoxDetails(int size) {
@@ -97,30 +89,28 @@ public class LigaInformation extends JPanel implements ActionListener {
         this.add(groupIndexCombo);
     }
 
-    private void backgroundDetails(int x, int y, int width, int height) {
-        background = new ImageIcon("A.jpg");
-        backgroundLabel = new JLabel(background);
-        backgroundLabel.setBounds(x, y, width, height);
-        this.add(backgroundLabel);
+    public void paintComponent(Graphics graphics) {
+        graphics.drawImage(this.background.getImage(), 0, 0,
+                MainWebWindow.WINDOW_WIDTH, MainWebWindow.WINDOW_HEIGHT, null);
     }
 
-    public void timer() {
-        try {
-            ActionListener time = new ActionListener() {
-                public void actionPerformed(ActionEvent ev) {
-                    System.out.println("Swing timer started");
-                }
-            };
-            Timer timer = new Timer(10, time);
-            timer.setRepeats(false);
-            timer.start();
-            Thread.sleep(10000);
-            System.out.println("Timeout");
-            this.setVisible(false);
 
-        } catch (InterruptedException expn) {
-        }
-    }
+//    public void timer() {
+//        try {
+//            ActionListener time = new ActionListener() {
+//                public void actionPerformed(ActionEvent ev) {
+//                    System.out.println("Swing timer started");
+//                }
+//            };
+//            Timer timer = new Timer(100, time);
+//            timer.setRepeats(false);
+//            timer.start();
+//            Thread.sleep(10000);
+//            System.out.println("Timeout");
+//            this.setVisible(false);
+//        } catch (InterruptedException ev) {
+//        }
+//    }
 
 }
 
