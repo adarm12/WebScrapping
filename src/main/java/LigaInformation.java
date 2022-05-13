@@ -6,6 +6,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class LigaInformation extends JPanel implements ActionListener {
 
@@ -40,9 +43,14 @@ public class LigaInformation extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == groupIndexCombo) {
+            this.groupIndexCombo.setEnabled(false);
             System.out.println(groupIndexCombo.getSelectedItem() + " index:" + groupIndexCombo.getSelectedIndex());
             showSelectedGroup(this.ligaPage, groupIndexCombo.getSelectedIndex());
-//            timer();
+
+        LigotMenu ligotMenu = new LigotMenu(0,0,1400,955,this.background);
+this.add(ligotMenu);
+            this.setVisible(false);
+           //            timer();
         }
     }
 
@@ -63,7 +71,7 @@ public class LigaInformation extends JPanel implements ActionListener {
             Element group = table.get(0).child(index);
             String groupName = group.getElementsByClass("big").text();
             String groupScore = group.child(8).text();
-            String groupInformation = ("שם הקבוצה: " + groupName + "     " + " ניקוד: " + groupScore);
+            String groupInformation = ("שם הקבוצה: " + groupName + "   " + " ניקוד: " + groupScore);
             System.out.println(groupInformation);
             scoreBored(groupInformation);
         }
@@ -77,7 +85,7 @@ public class LigaInformation extends JPanel implements ActionListener {
     }
 
     private void comboBoxDetails(int size) {
-        ArrayList<String> index = new ArrayList<String>();
+        ArrayList<String> index = new ArrayList();
         index.add("");
         for (int i = 1; i < size; i++) {
             index.add("" + i);
@@ -94,7 +102,9 @@ public class LigaInformation extends JPanel implements ActionListener {
                 MainWebWindow.WINDOW_WIDTH, MainWebWindow.WINDOW_HEIGHT, null);
     }
 
-
+    private void timer() {
+        Timer timer = new Timer();
+    }
 //    public void timer() {
 //        try {
 //            ActionListener time = new ActionListener() {
