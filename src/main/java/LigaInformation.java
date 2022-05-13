@@ -1,4 +1,3 @@
-
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
@@ -114,5 +113,3 @@ public class LigaInformation extends JPanel implements ActionListener {
 //    }
 
 }
-
-
