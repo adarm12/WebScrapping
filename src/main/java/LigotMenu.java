@@ -98,6 +98,7 @@ public class LigotMenu extends JPanel implements ActionListener {
         } catch (IOException ea) {
             ea.printStackTrace();
         }
+
     }
 
     private void hideWindow() {

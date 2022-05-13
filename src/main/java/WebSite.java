@@ -38,6 +38,7 @@ public class WebSite {
             Document ligaPage = Jsoup.connect(linkLiga).get();
 //            System.out.println(ligaPage.title());
 
+
             ArrayList<Element> allTable = ligaPage.getElementsByClass("score-list");
             ArrayList<Element> scoreTable = allTable.get(0).getElementsByTag("table");
 //                       System.out.println(scoreTable.size());

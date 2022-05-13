@@ -21,6 +21,7 @@ public class LigaInformation extends JPanel implements ActionListener {
     private JComboBox groupIndexCombo;
     private Document ligaPage;
 
+
     public LigaInformation(int x, int y, int width, int height, String text, Document ligaPage) {
         this.setBounds(x, y, width, height);
         this.setLayout(null);
