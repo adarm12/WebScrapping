@@ -25,6 +25,7 @@ public class LigaInformation extends JPanel implements ActionListener {
 
     public LigaInformation(int x, int y, int width, int height, String text, Document ligaPage, LigotMenu ligotMenu) {
         this.ligotMenu = ligotMenu;
+        this.ligaPage = ligaPage;
 
         this.setBounds(x, y, width, height);
         this.setLayout(null);
@@ -35,23 +36,24 @@ public class LigaInformation extends JPanel implements ActionListener {
                 DESCRIPTION_COMBO_WIDTH, DESCRIPTION_COMBO_HEIGHT, FONT_SIZE_DESCRIPTION_COMBO_, Color.white).getLabel();
         this.add(descriptionCombo);
 
-        this.ligaPage = ligaPage;
+
         comboBoxDetails(amountOfGroups(scoreTable(ligaPage)));
         this.background = new ImageIcon("A.jpg");
         this.setVisible(true);
     }
 
-    public void returnToMenu(){
+    public void returnToMenu() {
         this.setVisible(false);
         this.ligotMenu.showWindow();
     }
 
     public void actionPerformed(ActionEvent e) {
-
         if (e.getSource() == groupIndexCombo) {
-            this.groupIndexCombo.setEnabled(false);
-            System.out.println(groupIndexCombo.getSelectedItem() + " index:" + groupIndexCombo.getSelectedIndex());
+            if (this.groupIndexCombo.getSelectedIndex() != 0) {
+                this.groupIndexCombo.setEnabled(false);
+            }
             showSelectedGroup(this.ligaPage, groupIndexCombo.getSelectedIndex());
+            // System.out.println(groupIndexCombo.getSelectedItem() + " index:" + groupIndexCombo.getSelectedIndex());
 
             ThreadLiga thread = new ThreadLiga(this);
             thread.start();
