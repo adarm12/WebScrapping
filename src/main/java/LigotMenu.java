@@ -89,7 +89,7 @@ public class LigotMenu extends JPanel implements ActionListener {
                             hideWindow();
 
                             LigaInformation ligaInformation = new LigaInformation(0, 0, MainWebWindow.WINDOW_WIDTH,
-                                    MainWebWindow.WINDOW_HEIGHT, allLigaButtons.get(i).getText(), ligaPage);
+                                    MainWebWindow.WINDOW_HEIGHT, allLigaButtons.get(i).getText(), ligaPage, this);
                             this.add(ligaInformation);
                         }
                     }
@@ -106,6 +106,13 @@ public class LigotMenu extends JPanel implements ActionListener {
         backgroundLabel.setVisible(false);
         for (int i = 0; i < allLigaButtons.size(); i++) {
             allLigaButtons.get(i).setVisible(false);
+        }
+    }
+    public void openWindow(){
+        title.setVisible(true);
+        backgroundLabel.setVisible(true);
+        for (int i = 0; i < allLigaButtons.size(); i++) {
+            allLigaButtons.get(i).setVisible(true);
         }
     }
 
