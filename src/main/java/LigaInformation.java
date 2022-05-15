@@ -1,14 +1,11 @@
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.lang.Thread;
 
 
 public class LigaInformation extends JPanel implements ActionListener {
@@ -46,7 +43,7 @@ public class LigaInformation extends JPanel implements ActionListener {
 
     public void returnToMenu(){
         this.setVisible(false);
-        this.ligotMenu.openWindow();
+        this.ligotMenu.showWindow();
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -56,32 +53,8 @@ public class LigaInformation extends JPanel implements ActionListener {
             System.out.println(groupIndexCombo.getSelectedItem() + " index:" + groupIndexCombo.getSelectedIndex());
             showSelectedGroup(this.ligaPage, groupIndexCombo.getSelectedIndex());
 
-            //timer();
-
-            /*LigotMenu ligotMenu = new LigotMenu(0, 0, 1400, 955, this.background);
-            this.add(ligotMenu);*/
-
             ThreadLiga thread = new ThreadLiga(this);
             thread.start();
-            /*try {
-                Thread.sleep(4000);
-                returnToMenu();
-            } catch (InterruptedException interruptedException) {
-                interruptedException.printStackTrace();
-            }
-*/
-
-            //sleep here
-            //set menu to legotMenu
-
-            /*this.setVisible(false);
-            try {
-                Thread.sleep(10000);
-
-            } catch (InterruptedException interruptedException) {
-                interruptedException.printStackTrace();
-            }*/
-
         }
     }
 
@@ -132,23 +105,4 @@ public class LigaInformation extends JPanel implements ActionListener {
         graphics.drawImage(this.background.getImage(), 0, 0,
                 MainWebWindow.WINDOW_WIDTH, MainWebWindow.WINDOW_HEIGHT, null);
     }
-
-    /*public void timer() {
-        try {
-            ActionListener time = new ActionListener() {
-                public void actionPerformed(ActionEvent ev) {
-                    System.out.println("Swing timer started");
-                }
-            };
-            //Timer timer = new Timer("count down");
-            //Thread.sleep(10000);
-            System.out.println("Timeout");
-            this.setVisible(false);
-        } catch(Error e){
-            System.out.println(e);
-        }
-//        catch (InterruptedException ev) {
-//        }
-   }*/
-
 }

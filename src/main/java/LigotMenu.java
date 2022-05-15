@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class LigotMenu extends JPanel implements ActionListener {
     public static final int BUTTON_SPANISH_X = 150, BUTTON_SPANISH_Y = 180, BUTTON_HEIGHT_MARGIN = 55, BUTTON_WIDTH_MARGIN = 130;
-    public static final int TITLE_X = 480, TITLE_Y = 25, TITLE_WIDTH = 450, TITLE_HEIGHT = 100, TITLE_FONT_SIZE = 40;
+    public static final int TITLE_X = 555, TITLE_Y = 25, TITLE_WIDTH = 450, TITLE_HEIGHT = 100, TITLE_FONT_SIZE = 40;
 
     private ArrayList<JButton> allLigaButtons = createLigaButtons();
     private JLabel title;
@@ -108,7 +108,7 @@ public class LigotMenu extends JPanel implements ActionListener {
             allLigaButtons.get(i).setVisible(false);
         }
     }
-    public void openWindow(){
+    public void showWindow(){
         title.setVisible(true);
         backgroundLabel.setVisible(true);
         for (int i = 0; i < allLigaButtons.size(); i++) {
